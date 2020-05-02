@@ -1,0 +1,50 @@
+form.signup-form {
+    width        : 360px;
+    background   : #f1f1f1;
+    height       : 550px;
+    padding      : 50px 30px;
+    border-radius: 10px;
+    position     : absolute;
+    left         : 50%;
+    top          : 50%;
+    transform    : translate(-50%, -50%);
+    line-height  : 20.5px;
+}
+
+label.form-control-label {
+    text-transform: capitalize;
+    color         : #0f0e17;
+    font-size     : large;
+}
+
+input#submit {
+    background   : #ff8906;
+    color        : #fffffe;
+    display      : inline-block;
+    width        : 100%;
+    padding      : 8px;
+    text-align   : center;
+    font-size    : 16px;
+    cursor       : pointer;
+    border       : 1px solid #dcdfe6;
+    box-sizing   : border-box;
+    border-radius: 4px;
+}
+
+h5 {
+    justify-content: center;
+    display        : flex;
+}
+
+.form-group {
+    display       : flex;
+    flex-direction: row;
+    
+}
+
+.fa,
+.fas {
+    
+    font-size  : 20px;
+    padding: 7px 5px;
+}

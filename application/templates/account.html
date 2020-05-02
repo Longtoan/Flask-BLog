@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+
+<head>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/account.css') }}">
+
+</head>
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="profile">
+                <div class="profile-avatar">
+                    <img src="{{image_file}}" alt="" style="width: 150px;">
+                </div>
+                <div class="profile-name">
+                    <h4>{{current_user.username}}</h4>
+                </div>
+                <div class="profile-user-button">
+                    <button type="button" class="btn btn-success btn-sm">Follow</button>
+                    <button type="button" class="btn btn-danger btn-sm">Message</button>
+                </div>
+                <div class="profile-usermenu">
+                    <ul class="nav flex-column">
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">OverView</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Write Post</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Account Setting</a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8"></div>
+    </div>
+</div>
+{% endblock %}

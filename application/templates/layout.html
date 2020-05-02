@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/9fb6ceac78.js" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+
+</head>
+
+<body>
+    <div class="header">
+        <div class="container navigation">
+
+
+            <nav class="navbar navbar-expand-lg">
+                <!-- <a class="navbar-brand" href="home">BLOG CỦA TÒN</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button> -->
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="home">HOME <span class="sr-only"></span></a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="newest">NEWEST <span class="sr-only"></span></a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="series">SERIES <span class="sr-only"></span></a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#">ABOUT</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#">CONTACT</a>
+                        </li>
+
+
+                    </ul>
+
+                    <form class="form-inline my-2 my-lg-0">
+                        <ul class="navbar-nav mr-auto">
+                            {% if current_user.is_authenticated %}
+                            <li class="nav-item active">
+                                <a class="nav-link" href="account">PROFILE <span class="sr-only"></span></a>
+                            </li>
+                            <li class="nav-item active">
+                                <a class="nav-link" href="logout">LOGOUT</a>
+                            </li>
+                            {% else %}
+                            <li class="nav-item active">
+                                <a class="nav-link" href="login">LOGIN <span class="sr-only"></span></a>
+                            </li>
+                            <li class="nav-item active">
+                                <a class="nav-link" href="register">SIGNUP</a>
+                            </li>
+                            {% endif %}
+
+                        </ul>
+                    </form>
+                </div>
+            </nav>
+
+
+        </div>
+    </div>
+    <div class="viewport">
+
+        {% block content %}
+        {% endblock %}
+
+    </div>
+</body>
+
+</html>
