@@ -13,10 +13,10 @@ class User(db.Model, UserMixin):
     image_file = db.Column(db.String(20), nullable=False,
                            default='default.png')
     password = db.Column(db.String(60), nullable=False)
-    posts = db.relationship('Content', backref='author', lazy=True)
+    posts = db.relationship('CreatePost', backref='author', lazy=True)
 
     def __repr__(self):
-        return '<User {}>'.format(self.username)
+        return '<User {}>'.format(self.username,self.id )
 
     def hash_password(self, password):
         self.password = generate_password_hash(password, method='sha256')
@@ -25,15 +25,15 @@ class User(db.Model, UserMixin):
         return check_password_hash(self.password, password)
 
 
-class Content(db.Model):
+class CreatePost(db.Model):
     __tablename_ = "Table Content"
     id = db.Column(db.Integer, primary_key=True)
-    Title = db.Column(db.String(100), unique=True, nullable=False)
-    Tag = db.Column(db.String(50), unique=False, nullable=False)
-    Description = db.Column(db.Text, nullable=False)
+    title = db.Column(db.String(100), unique=True, nullable=False)
+    # Tag = db.Column(db.String(50), unique=False, nullable=False)
+    content = db.Column(db.Text, nullable=False)
     datepost = db.Column(db.DateTime, nullable=False,
                          default=datetime.utcnow())
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
     def __repr__(self):
-        return '<Content {}>'.format(self.Title, self.datepost)
+        return '<Content {}>'.format(self.id,self.title, self.datepost)

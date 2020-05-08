@@ -1,29 +1,22 @@
-img {
-  width: 150px;
-}
-
-.profile-avatar {
+/* .profile-avatar {
   border               : solid;
   -webkit-border-radius: 50% !important;
   -moz-border-radius   : 50% !important;
   border-radius        : 50% !important;
-}
+} */
 
 h4 {
   color         : #fffffe;
   text-transform: capitalize;
-  line-height: 22px;
-  padding: 10px;
+  line-height   : 22px;
+  padding       : 10px;
 }
 
 .profile {
-  display       : flex;
-  align-items   : center;
-  flex-direction: column;
-  border        : solid;
-  border-color  : #fffffe;
+  display          : flex;
+  align-items      : center;
+  flex-direction   : column;
+  /* border        : solid;
+  border-color     : #fffffe; */
 }
-button {
-  margin: 10px;
-  width: 100%;
-}
+

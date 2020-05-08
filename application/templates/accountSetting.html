@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container">
+    <form method="POST">
+        {{form.hidden_tag()}}
+        {% for message in get_flashed_messages() %}
+        <div class="alert alert-danger">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            {{ message }}
+        </div>
+        {% endfor %}
+        <fieldset class="form-group">
+            <div class="form-group">
+                {% if form.username.errors %}
+                {{ form.username(class="form-control form-control-lg is-invalid")}}
+                <div class="invalid-feedback">
+                    {% for error in form.username.errors %}
+                    <span>{{error}}</span>
+                    {% endfor %}
+
+                </div>
+                {%else%}
+                {{ form.username(class="form-control form-control-lg",placeholder="Username") }}
+                {% endif %}
+
+            </div>
+            <button class="change-Password"></button>
+        </fieldset>
+
+</div>
+{% endblock content %}

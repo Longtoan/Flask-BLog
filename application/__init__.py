@@ -2,12 +2,14 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
+from flask_pagedown import PageDown
 
 db = SQLAlchemy()
 login_manager = LoginManager()
 
+
 def create_app():
-        
+
     app = Flask(__name__, instance_relative_config=False)
     app.config.from_object('config.Config')
 
@@ -15,6 +17,8 @@ def create_app():
     login_manager.init_app(app)
     login_manager.login_view = 'login'
     login_manager.login_message_category = 'info'
+    pagedown = PageDown(app)
+
     with app.app_context():
         from . import routes  # Import routes
         db.create_all()  # Create database tables for our data models

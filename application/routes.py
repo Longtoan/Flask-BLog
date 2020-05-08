@@ -2,15 +2,19 @@ from flask import request, jsonify, render_template, make_response, redirect, ur
 from flask_login import login_required, logout_user, current_user, login_user, login_required
 from datetime import datetime as data
 from flask import current_app as app
-from .model import db, User
-from .validation.form import RegisterFormValidation, LoginFormValidation
+from .model import db, User, CreatePost
+from .validation.account import RegisterFormValidation, LoginFormValidation,UpdateProfile
+from .validation.CreatePost import PostForm
 from .import login_manager
+
+from sqlalchemy.orm import lazyload
 
 
 @app.route("/")
 @app.route("/home")
 def home():
-    return render_template('home.html')
+    posts = CreatePost.query.all()
+    return render_template('home.html', title="Home", posts=posts)
 
 
 @app.route("/register", methods=['GET', 'POST'])
@@ -33,7 +37,7 @@ def register():
         else:
 
             flash("A user already exists with that email or username")
-    return render_template('register.html', form=register)
+    return render_template('register.html', title="Register", form=register)
 
 
 @app.route("/login", methods=['GET', 'POST'])
@@ -51,14 +55,51 @@ def login():
             return redirect(next_page) if next_page else redirect(url_for('home'))
         else:
             flash('Invalid email/password combination')
-    return render_template('login.html', form=login)
+    return render_template('login.html', title="Login ", form=login)
 
 
-@app.route("/account")
+@app.route("/account", methods=['GET', 'POST'])
 @login_required
 def account():
-    image_file = url_for('static', filename='profile/' + current_user.image_file)
-    return render_template("account.html",image_file=image_file)
+    image_file = url_for('static', filename='profile/' +
+                         current_user.image_file)
+    posts = CreatePost.query.filter_by(user_id=current_user.id).all()
+    # for i in posts:
+    #     print(i.title)
+    return render_template("account.html", title="Account", image_file=image_file,posts=posts)
+
+@app.route("/setting")
+@login_required
+def setting():
+    form = UpdateProfile()
+    if form.validate_on_submit():
+        username = form.get.data
+        user = User.query.filter_by(username=username).first()
+        if(user is None):
+            db.session.add(user)
+            db.session.commit()
+
+            return redirect(url_for('account'))
+    return render_template("accountSetting.html",title="Account Setting", form=form)
+@app.route("/post/new", methods=['GET', 'POST'])
+@login_required
+def createpost():
+    form = PostForm()
+    if form.validate_on_submit():
+        title = form.title.data
+        content = form.content.data
+
+        post = CreatePost(title=title, content=content, author=current_user)
+        db.session.add(post)
+        db.session.commit()
+        return redirect(url_for("home"))
+    return render_template("createpost.html", title="New Post", form=form)
+
+
+@app.route("/post/<int:post_id>")
+def post(post_id):
+    post = CreatePost.query.get_or_404(post_id)
+    return render_template('post.html', title=post.title, post=post)
 
 
 @app.route("/logout")

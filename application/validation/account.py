@@ -24,6 +24,19 @@ class LoginFormValidation(FlaskForm):
         Email(message='Please enter a valid email')])
 
     password = PasswordField('password', validators=[
-                           DataRequired()])
+        DataRequired()])
 
     submit = SubmitField('Login')
+
+
+class UpdateProfile(FlaskForm):
+
+    username = StringField('username', validators=[
+        Length(min=5, max=20)])
+    password = PasswordField('password', validators=[
+                             Length(min=6, message="Please select a password strongers")])
+
+    password_comfirm = PasswordField('password_comfirm', validators=[
+        EqualTo('password', message="Password must match")])
+
+    submit = SubmitField('update')

@@ -1,12 +1,12 @@
 {% extends "layout.html" %}
-
+{% block content %}
 
 <head>
 
     <link rel="stylesheet" href="{{ url_for('static', filename='css/account.css') }}">
 
 </head>
-{% block content %}
+
 <div class="container">
     <div class="row">
         <div class="col-md-4">
@@ -17,28 +17,38 @@
                 <div class="profile-name">
                     <h4>{{current_user.username}}</h4>
                 </div>
-                <div class="profile-user-button">
-                    <button type="button" class="btn btn-success btn-sm">Follow</button>
-                    <button type="button" class="btn btn-danger btn-sm">Message</button>
-                </div>
+
                 <div class="profile-usermenu">
                     <ul class="nav flex-column">
+
 
                         <li class="nav-item">
                             <a class="nav-link" href="#">OverView</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Write Post</a>
+                            <a class="nav-link" href="/post/new">Write Post</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Account Setting</a>
+                            <a class="nav-link" href="/setting">Account Setting</a>
                         </li>
 
                     </ul>
                 </div>
             </div>
         </div>
-        <div class="col-md-8"></div>
+        <div class="col-md-8">
+            <h4>Bài Đăng của bạn</h4>
+            {% for post in posts %}
+            <div class="card" style="width: 100%;">
+
+                <div class="card-body">
+                    <h5 class="card-title">{{post.title}}</h5>
+                    <p class="card-text">{{post.content}}</p>
+                    <a href="/post/{post.id}" class="btn btn-primary">Xem</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
     </div>
 </div>
-{% endblock %}
+{% endblock content %}
