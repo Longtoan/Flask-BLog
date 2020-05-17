@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<head>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/createpost.css') }}">
+
+</head>
+<div class="container">
+    <form method="POST" class="createtag">
+        {{ form.hidden_tag() }}
+        {% for message in get_flashed_messages() %}
+        <div class="alert alert-danger" role="alert">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            {{ message }}
+        </div>
+        {% endfor %}
+        <fieldset class="form-group">
+
+            <div class="form-group">
+                {% if form.name.errors %}
+                {{ form.name(class="form-control form-control-lg is-invalid")}}
+                <div class="invalid-feddback">
+                    {% for error in form.name.errors %}
+                    <span>{{error}}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+
+                {{ form.name(class="form-control form-control-lg",placeholder="tagname") }}
+                {% endif %}
+            </div>
+
+
+        </fieldset>
+        <div class="form-group">
+            {{form.submit(class="btn button")}}
+        </div>
+    </form>
+</div>
+{% endblock content %}

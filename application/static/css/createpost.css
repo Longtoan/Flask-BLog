@@ -1,0 +1,10 @@
+input#title {
+    width: 300px;
+}
+textarea#content {
+    height: 350px;
+}
+input#submit {
+    background: #2ecc71;
+    color: #fffffe;
+}

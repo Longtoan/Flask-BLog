@@ -43,6 +43,11 @@
         <div class="form-group">
             {{ form.submit(class="btn button") }}
         </div>
+        <div class="border-top pt-3">
+            <small class="text-muted">
+                Don't Have An Account? <a class="ml-2" href="{{ url_for('register') }}">SignUp</a>
+            </small>
+        </div>
     </form>
 </div>
 
